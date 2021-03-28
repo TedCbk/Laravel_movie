@@ -12,7 +12,7 @@
 </head>
 
 <body class="font-sans bg-gray-900 text-white">
-    <nav class="border-b border-gray-800">
+    <nav class="border-b border-gray-800 px-4">
         <div class="container p-4 mx-auto flex items-center justify-between px-4 py-6">
             <ul class="flex items-center">
                 <li>
