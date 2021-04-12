@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LaraMovies</title>
-    
+    <livewire:styles />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/app.css">
 </head>
@@ -31,12 +31,7 @@
                 </li>
             </ul>
             <div class="flex flex-col md:flex-row items-center">
-                <div class="relative mt-3 md:mt-0">
-                    <input type="text" class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-outline" placeholder="Search">
-                    <div class="absolute top-0">
-                        <i class="fas fa-search w-4 mt-2 ml-2 fill-current text-gray-500"></i>
-                    </div>
-                </div>
+                <livewire:search-dropdown>
                 <div class="md:ml-4 mt-3 md:mt-0">
                     <a href="#">
                         <img src="{{ asset('images/DSC_0676-min.JPG') }}" alt="avatar" class="rounded-full w-8 h-8">
@@ -46,6 +41,7 @@
         </div>
     </nav>
     @yield('content')
+    <livewire:scripts />
 </body>
 
 </html>
