@@ -2,7 +2,7 @@
         {{-- Using a wire model such as v-model, debounce 500ms to make the results appears after typing --}}
         <input wire:model.debounce.500ms="search" type="text"
             class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-outline"
-            placeholder="Search"
+            placeholder="Search (Press '/' to focus)"
             x-ref="search"
             @keydown.window="
                 if(event.keyCode === 191){

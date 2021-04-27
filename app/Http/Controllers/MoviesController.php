@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ViewModels\MoviesViewModel;
+use App\ViewModels\MovieViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -25,21 +27,25 @@ class MoviesController extends Controller
         ->json()['results'];
 
         // We have to grab the genre from another endpoint and compare it with the genre_id on from popularMovies
-        $genresArray = Http::withToken(config('services.tmdb.token'))
+        $genres = Http::withToken(config('services.tmdb.token'))
         ->get('https://api.themoviedb.org/3/genre/movie/list')
         ->json()['genres'];
 
-        // Using Illuminate Collection to reference the genres with their ids
-        $genres = collect($genresArray)->mapWithKeys(function ($genre) {
-            return [$genre['id'] => $genre['name']];
-        });
 
-        return view('index', [
-            'popularMovies' => $popularMovies,
-            'nowPlayingMovies' => $nowPlayingMovies,
-            'genres' => $genres,
-        ]);
+        // return view('index', [
+        //     'popularMovies' => $popularMovies,
+        //     'nowPlayingMovies' => $nowPlayingMovies,
+        //     'genres' => $genres,
+        // ]);
+         $viewModel = new MoviesViewModel(
+             $popularMovies,
+             $nowPlayingMovies,
+             $genres,
+         );
+
+        return view('index', $viewModel);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -75,9 +81,9 @@ class MoviesController extends Controller
         ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images')
         ->json();
 
-        return view('show', [
-            'movie' => $movie,
-            ]);
+        $viewModel = new MovieViewModel($movie);
+
+        return view('show', $viewModel);
     }
 
     /**
